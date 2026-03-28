@@ -1,0 +1,31 @@
+2026-03-27 16:48:56,627 - Orchestrator - INFO - Orchestrator initialized
+2026-03-27 16:48:56,628 - Orchestrator - INFO - Vault: D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault
+2026-03-27 16:48:56,629 - Orchestrator - DEBUG - Starting processing cycle
+2026-03-27 16:48:56,629 - Orchestrator - DEBUG - No pending tasks
+2026-03-27 16:49:24,305 - Orchestrator - INFO - Orchestrator initialized
+2026-03-27 16:49:24,306 - Orchestrator - INFO - Vault: D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault
+2026-03-27 16:49:24,306 - Orchestrator - DEBUG - Starting processing cycle
+2026-03-27 16:49:24,307 - Orchestrator - DEBUG - No pending tasks
+2026-03-27 16:49:24,309 - Orchestrator - DEBUG - Dashboard updated
+2026-03-27 16:49:24,310 - Orchestrator - INFO - Starting Orchestrator main loop
+2026-03-27 16:49:24,311 - Orchestrator - INFO - Press Ctrl+C to stop
+2026-03-27 16:49:24,311 - Orchestrator - DEBUG - Starting processing cycle
+2026-03-27 16:49:24,312 - Orchestrator - DEBUG - No pending tasks
+2026-03-27 16:49:24,339 - Orchestrator - DEBUG - Dashboard updated
+2026-03-27 16:54:20,977 - Orchestrator - INFO - Orchestrator initialized
+2026-03-27 16:54:20,978 - Orchestrator - INFO - Vault: D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault
+2026-03-27 16:54:20,978 - Orchestrator - DEBUG - Starting processing cycle
+2026-03-27 16:54:20,979 - Orchestrator - INFO - Found 1 pending task(s)
+2026-03-27 16:54:20,980 - Orchestrator - INFO - Claimed task: FILE_new_test.txt_2026-03-27_16-52-49.md
+2026-03-27 16:54:20,980 - Orchestrator - INFO - Triggering Claude Code for: FILE_new_test.txt_2026-03-27_16-52-49.md
+2026-03-27 16:54:20,982 - Orchestrator - INFO - Would run: claude --prompt Process the task in D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault\In_Progress\FILE_new_test.txt_2026-03-27_16-52-49.md. Follow the Company Handbook rules. Create a plan if needed. When complete, move the task file to /Done and update the Dashboard. --cwd D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault
+2026-03-27 16:54:20,982 - Orchestrator - INFO - NOTE: For Bronze tier, manually run Claude Code with the vault:
+2026-03-27 16:54:20,983 - Orchestrator - INFO -   claude --cwd "D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault"
+2026-03-27 16:54:20,983 - Orchestrator - INFO -   Then ask Claude to: "Process all files in /In_Progress"
+2026-03-27 16:54:20,983 - Orchestrator - INFO - Task FILE_new_test.txt_2026-03-27_16-52-49.md sent to Claude
+2026-03-27 16:54:20,987 - Orchestrator - DEBUG - Dashboard updated
+2026-03-27 16:54:20,989 - Orchestrator - INFO - Starting Orchestrator main loop
+2026-03-27 16:54:20,989 - Orchestrator - INFO - Press Ctrl+C to stop
+2026-03-27 16:54:20,990 - Orchestrator - DEBUG - Starting processing cycle
+2026-03-27 16:54:20,991 - Orchestrator - DEBUG - No pending tasks
+2026-03-27 16:54:21,019 - Orchestrator - DEBUG - Dashboard updated

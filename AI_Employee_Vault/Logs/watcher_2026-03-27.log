@@ -1,0 +1,37 @@
+2026-03-27 16:48:23,797 - FileSystemWatcher - INFO - Initialized FileSystemWatcher
+2026-03-27 16:48:23,798 - FileSystemWatcher - INFO - Vault path: D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault
+2026-03-27 16:48:23,799 - FileSystemWatcher - INFO - Check interval: 5s
+2026-03-27 16:48:23,803 - FileSystemWatcher - INFO - Drop folder: D:\DropFolder
+2026-03-27 16:48:23,804 - FileSystemWatcher - INFO - Starting FileSystemWatcher with watchdog (real-time)
+2026-03-27 16:50:59,208 - FileSystemWatcher - INFO - Initialized FileSystemWatcher
+2026-03-27 16:50:59,208 - FileSystemWatcher - INFO - Vault path: D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault
+2026-03-27 16:50:59,209 - FileSystemWatcher - INFO - Check interval: 5s
+2026-03-27 16:50:59,210 - FileSystemWatcher - INFO - Drop folder: D:\DropFolder
+2026-03-27 16:50:59,210 - FileSystemWatcher - INFO - Starting FileSystemWatcher with watchdog (real-time)
+2026-03-27 16:52:49,493 - FileSystemWatcher - INFO - Copied new_test.txt to vault
+2026-03-27 16:52:49,496 - FileSystemWatcher - INFO - Created action file: FILE_new_test.txt_2026-03-27_16-52-49.md
+2026-03-27 23:44:32,028 - FileSystemWatcher - INFO - Initialized FileSystemWatcher
+2026-03-27 23:44:32,029 - FileSystemWatcher - INFO - Vault path: D:\Hackathon 0\Personal -AI-Employee\AI_Employee_Vault
+2026-03-27 23:44:32,029 - FileSystemWatcher - INFO - Check interval: 5s
+2026-03-27 23:44:32,044 - FileSystemWatcher - DEBUG - Loaded 1 known files
+2026-03-27 23:44:32,044 - FileSystemWatcher - INFO - Drop folder: D:\DropFolder
+2026-03-27 23:44:32,044 - FileSystemWatcher - INFO - Starting FileSystemWatcher with watchdog (real-time)
+2026-03-27 23:59:03,378 - FileSystemWatcher - ERROR - Error hashing file: [Errno 13] Permission denied: 'D:\\DropFolder\\test.txt.txt'
+2026-03-27 23:59:03,383 - FileSystemWatcher - INFO - Copied test.txt.txt to vault
+2026-03-27 23:59:03,386 - FileSystemWatcher - DEBUG - Skipping known file: test.txt.txt
+2026-03-27 23:59:03,413 - FileSystemWatcher - INFO - Created action file: FILE_test.txt.txt_2026-03-27_23-59-03.md
+2026-03-28 00:10:28,498 - FileSystemWatcher - INFO - Copied notes.txt.txt to vault
+2026-03-28 00:10:28,502 - FileSystemWatcher - INFO - Copied notes.txt.txt to vault
+2026-03-28 00:10:28,532 - FileSystemWatcher - INFO - Created action file: FILE_notes.txt.txt_2026-03-28_00-10-28.md
+2026-03-28 00:10:28,532 - FileSystemWatcher - INFO - Created action file: FILE_notes.txt.txt_2026-03-28_00-10-28.md
+2026-03-28 00:16:35,333 - FileSystemWatcher - INFO - Copied task.txt to vault
+2026-03-28 00:16:35,334 - FileSystemWatcher - INFO - Copied task.txt to vault
+2026-03-28 00:16:35,335 - FileSystemWatcher - INFO - Created action file: FILE_task.txt_2026-03-28_00-16-35.md
+2026-03-28 00:16:35,338 - FileSystemWatcher - INFO - Created action file: FILE_task.txt_2026-03-28_00-16-35.md
+2026-03-28 14:46:17,543 - FileSystemWatcher - INFO - Copied my_document.txt to vault
+2026-03-28 14:46:17,549 - FileSystemWatcher - INFO - Created action file: FILE_my_document.txt_2026-03-28_14-46-17.md
+2026-03-28 14:46:17,544 - FileSystemWatcher - DEBUG - Skipping known file: my_document.txt
+2026-03-28 15:35:12,642 - FileSystemWatcher - INFO - Copied ai_test.txt to vault
+2026-03-28 15:35:12,649 - FileSystemWatcher - INFO - Created action file: FILE_ai_test.txt_2026-03-28_15-35-12.md
+2026-03-28 15:35:12,676 - FileSystemWatcher - INFO - Copied ai_test.txt to vault
+2026-03-28 15:35:12,695 - FileSystemWatcher - INFO - Created action file: FILE_ai_test.txt_2026-03-28_15-35-12.md
