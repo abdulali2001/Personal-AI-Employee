@@ -5,6 +5,60 @@
       "source": "bilalmk/todo_correct",
       "sourceType": "github",
       "computedHash": "f73daf75e38650c202e61f652a26578db157f8423e8bcf283bcd93b441641461"
+    },
+    "process-needs-action": {
+      "source": "local",
+      "sourceType": "file",
+      "path": "skills/process-needs-action.md",
+      "tier": "bronze"
+    },
+    "email-mcp-sender": {
+      "source": "local",
+      "sourceType": "file",
+      "path": "skills/email-mcp-sender.md",
+      "tier": "silver"
+    },
+    "gmail-watcher": {
+      "source": "local",
+      "sourceType": "file",
+      "path": "skills/gmail-watcher.md",
+      "tier": "silver"
+    },
+    "whatsapp-watcher": {
+      "source": "local",
+      "sourceType": "file",
+      "path": "skills/whatsapp-watcher.md",
+      "tier": "silver"
+    },
+    "linkedin-poster": {
+      "source": "local",
+      "sourceType": "file",
+      "path": "skills/linkedin-poster.md",
+      "tier": "silver"
+    },
+    "approval-workflow": {
+      "source": "local",
+      "sourceType": "file",
+      "path": "skills/approval-workflow.md",
+      "tier": "silver"
+    },
+    "plan-generator": {
+      "source": "local",
+      "sourceType": "file",
+      "path": "skills/plan-generator.md",
+      "tier": "silver"
+    },
+    "weekly-briefing": {
+      "source": "local",
+      "sourceType": "file",
+      "path": "skills/weekly-briefing.md",
+      "tier": "silver"
     }
-  }
+  },
+  "tier_summary": {
+    "bronze": 1,
+    "silver": 7,
+    "gold": 0
+  },
+  "last_updated": "2026-03-29"
 }

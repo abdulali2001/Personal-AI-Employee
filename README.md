@@ -1,30 +1,42 @@
-# AI Employee - Bronze Tier
+# AI Employee - Silver Tier
 
 > **Your life and business on autopilot. Local-first, agent-driven, human-in-the-loop.**
 
-This is the **Bronze Tier** implementation of the Personal AI Employee Hackathon 0. It provides the foundational layer for an autonomous AI employee that uses Obsidian as the dashboard and Qwen Code as the reasoning engine.
+This is the **Silver Tier** implementation of the Personal AI Employee Hackathon 0. It builds on Bronze Tier with Gmail monitoring, LinkedIn auto-posting, MCP email integration, and Human-in-the-Loop approval workflows.
 
-## 📋 Bronze Tier Deliverables
+## 📋 Silver Tier Deliverables
 
-- [x] Obsidian vault with `Dashboard.md` and `Company_Handbook.md`
-- [x] One working Watcher script (File System Watcher)
-- [x] Qwen Code integration for reading/writing to the vault
-- [x] Basic folder structure: `/Inbox`, `/Needs_Action`, `/Done`
-- [x] Agent Skill for processing tasks
+- [x] All Bronze Tier requirements
+- [x] Gmail Watcher - Monitor Gmail for new emails
+- [x] LinkedIn Poster - Auto-generate and post business content
+- [x] MCP Email Server - Send emails via Gmail API
+- [x] Human-in-the-Loop (HITL) approval workflow
+- [x] Plan generation for multi-step tasks
+- [x] Enhanced orchestrator with Silver Tier features
+- [x] All AI functionality as Agent Skills
 
 ## 🏗️ Architecture
 
 ```
 ┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│  Drop Folder    │────▶│  File Watcher    │────▶│  Needs_Action   │
-│  (Input)        │     │  (Python)        │     │  (Obsidian)     │
+│     Gmail       │────▶│  Gmail Watcher   │────▶│  Needs_Action   │
+│   (Incoming)    │     │  (Python)        │     │  (Obsidian)     │
 └─────────────────┘     └──────────────────┘     └────────┬────────┘
                                                           │
+┌─────────────────┐     ┌──────────────────┐             │
+│    LinkedIn     │◀────│  LinkedIn Poster │◀────────────┤
+│   (Outgoing)    │     │  (Playwright)    │             │
+└─────────────────┘     └──────────────────┘             │
                                                           ▼
 ┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
 │  Dashboard.md   │◀────│  Qwen Code       │◀────│  Orchestrator   │
 │  (Status)       │     │  (Reasoning)     │     │  (Coordinator)  │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
+└─────────────────┘     └─────────────────┘     └────────┬────────┘
+                                                         │
+┌─────────────────┐     ┌──────────────────┐             │
+│   Gmail Send    │◀────│  MCP Email       │◀────────────┤
+│  (Outgoing)     │     │  Server          │             │
+└─────────────────┘     └──────────────────┘
 ```
 
 ## 📁 Project Structure
@@ -35,7 +47,6 @@ Personal -AI-Employee/
 │   ├── Dashboard.md         # Real-time status dashboard
 │   ├── Company_Handbook.md  # Rules of engagement
 │   ├── Business_Goals.md    # Objectives and metrics
-│   ├── Inbox/               # Raw incoming items
 │   ├── Needs_Action/        # Items requiring processing
 │   ├── In_Progress/         # Currently active tasks
 │   ├── Pending_Approval/    # Awaiting human decision
@@ -45,18 +56,30 @@ Personal -AI-Employee/
 │   ├── Plans/               # Multi-step task plans
 │   ├── Logs/                # System activity logs
 │   ├── Briefings/           # CEO briefings
-│   ├── Accounting/          # Financial records
+│   ├── LinkedIn_Posts/      # LinkedIn draft posts
 │   └── Files/               # Processed file attachments
 │
 ├── watchers/                # Watcher scripts
 │   ├── base_watcher.py      # Base class for all watchers
-│   └── filesystem_watcher.py # File system monitor
+│   ├── filesystem_watcher.py # File system monitor
+│   ├── gmail_watcher.py     # Gmail monitor (NEW - Silver)
+│   └── linkedin_poster.py   # LinkedIn auto-poster (NEW - Silver)
 │
 ├── skills/                  # Agent Skills for Qwen Code
-│   └── process-needs-action.md
+│   ├── process-needs-action.md      # Core task processing
+│   ├── email-mcp-sender.md          # Email sending (NEW - Silver)
+│   ├── gmail-watcher.md             # Gmail monitoring (NEW - Silver)
+│   ├── whatsapp-watcher.md          # WhatsApp monitoring (NEW - Silver)
+│   ├── linkedin-poster.md           # LinkedIn posting (NEW - Silver)
+│   ├── approval-workflow.md         # HITL workflow (NEW - Silver)
+│   ├── plan-generator.md            # Plan creation (NEW - Silver)
+│   └── weekly-briefing.md           # CEO briefing (NEW - Silver)
 │
-├── orchestrator.py          # Master coordinator
+├── mcp_email_server.py      # MCP server for email (NEW - Silver)
+├── orchestrator.py          # Master coordinator (Enhanced)
 ├── requirements.txt         # Python dependencies
+├── credentials.json.template # Gmail OAuth template
+├── SILVER_TIER_SETUP.md    # Setup guide (NEW)
 └── README.md               # This file
 ```
 
@@ -75,85 +98,148 @@ Ensure you have the following installed:
 
 ### Installation
 
-1. **Clone or download this repository**
+**Step 1: Install Dependencies**
 
-2. **Install Python dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+```bash
+cd "D:\Hackathon 0\Personal-AI-Employee"
+pip install -r requirements.txt
+playwright install chromium
+```
 
-3. **Open the vault in Obsidian**:
-   - Launch Obsidian
-   - Click "Open folder as vault"
-   - Select `AI_Employee_Vault` folder
+**Step 2: Setup Gmail API**
 
-4. **Verify Qwen Code installation**:
-   ```bash
-   qwen --version
-   ```
+1. Follow [SILVER_TIER_SETUP.md](SILVER_TIER_SETUP.md) for Gmail OAuth setup
+2. Download `credentials.json` from Google Cloud Console
+3. Place in project root directory
+
+**Step 3: First-Time Authentication**
+
+```bash
+# Gmail authentication
+python watchers/gmail_watcher.py "AI_Employee_Vault" credentials.json
+
+# LinkedIn authentication
+python watchers/linkedin_poster.py "AI_Employee_Vault" login
+```
+
+**Step 4: Open the vault in Obsidian**:
+- Launch Obsidian
+- Click "Open folder as vault"
+- Select `AI_Employee_Vault` folder
+
+**Step 5: Verify Qwen Code installation**:
+```bash
+qwen --version
+```
 
 ### Running the AI Employee
 
 #### Option 1: Start All Components
 
 ```bash
-# Terminal 1: Start the File Watcher
-cd "D:\Hackathon 0\Personal -AI-Employee"
-python watchers/filesystem_watcher.py "AI_Employee_Vault" "D:\DropFolder"
+# Terminal 1: Start Gmail Watcher
+cd "D:\Hackathon 0\Personal-AI-Employee"
+python watchers/gmail_watcher.py "AI_Employee_Vault" credentials.json
 
 # Terminal 2: Start the Orchestrator
-cd "D:\Hackathon 0\Personal -AI-Employee"
+cd "D:\Hackathon 0\Personal-AI-Employee"
 python orchestrator.py "AI_Employee_Vault"
+
+# Terminal 3: Process tasks with Qwen Code
+cd "D:\Hackathon 0\Personal-AI-Employee"
+qwen --cwd "AI_Employee_Vault" --prompt "Process all files in /Needs_Action and /Pending_Approval"
 ```
 
 #### Option 2: Manual Processing
 
 ```bash
-# Process tasks manually with Qwen Code
-qwen --cwd "AI_Employee_Vault" --prompt "Process all files in /Needs_Action"
+# Check Gmail manually
+python watchers/gmail_watcher.py "AI_Employee_Vault" credentials.json
+
+# Create LinkedIn post draft
+python watchers/linkedin_poster.py "AI_Employee_Vault" draft business_update "Your Topic"
+
+# Process tasks with Qwen Code
+qwen --cwd "AI_Employee_Vault" --prompt "Process all pending tasks"
 ```
+
+#### Option 3: Scheduled (Windows Task Scheduler)
+
+Set up scheduled tasks for:
+- Gmail Watcher: Every 5 minutes
+- Orchestrator: Every 10 minutes
+- Weekly Briefing: Monday 7:00 AM
+
+See [SILVER_TIER_SETUP.md](SILVER_TIER_SETUP.md) for detailed scheduling instructions.
 
 ## 📖 Usage Guide
 
 ### How It Works
 
-1. **Drop a file** into your designated drop folder (e.g., `D:\DropFolder`)
+1. **Gmail Watcher detects** new email and creates action file in `/Needs_Action`
 
-2. **File Watcher detects** the new file and creates an action file in `/Needs_Action`
+2. **Orchestrator picks up** the task, creates Plan.md in `/Plans`
 
-3. **Orchestrator picks up** the task and moves it to `/In_Progress`
+3. **Qwen Code processes** the task according to `Company_Handbook.md` rules
 
-4. **Qwen Code processes** the task according to `Company_Handbook.md` rules
+4. **Approval workflow** - If action requires approval (email send, LinkedIn post), file moves to `/Pending_Approval`
 
-5. **Task completes** and moves to `/Done`, Dashboard updates
+5. **Human approves** by moving file from `/Pending_Approval` to `/Approved`
 
-### Creating Your First Task
+6. **MCP server executes** the approved action (send email, post to LinkedIn)
 
-1. **Create a test file**:
-   ```bash
-   echo "Process this document" > "D:\DropFolder\test.txt"
-   ```
+7. **Task completes** and moves to `/Done`, Dashboard updates
 
-2. **Wait 5 seconds** for the watcher to detect it
+### Silver Tier Features
 
-3. **Check `/Needs_Action`** folder - you should see a new `.md` file
+#### Gmail Integration
 
-4. **Run Qwen Code**:
-   ```bash
-   qwen --cwd "AI_Employee_Vault"
-   ```
+```bash
+# Monitor Gmail continuously
+python watchers/gmail_watcher.py "AI_Employee_Vault" credentials.json
 
-5. **Ask Qwen to**: "Process all files in /Needs_Action following the Company Handbook"
-
-### Understanding the Flow
-
+# Emails appear in /Needs_Action as:
+# EMAIL_{subject}_{sender}_{timestamp}.md
 ```
-1. User drops file → D:\DropFolder\document.pdf
-2. Watcher detects → Creates FILE_document_2026-03-27.md in /Needs_Action
-3. Orchestrator → Moves to /In_Progress
-4. Qwen Code → Analyzes, creates plan, executes
-5. Complete → Moves to /Done, updates Dashboard
+
+#### LinkedIn Auto-Posting
+
+```bash
+# Create draft post
+python watchers/linkedin_poster.py "AI_Employee_Vault" draft business_update "New Product Launch"
+
+# Draft saved to /LinkedIn_Posts/
+# Move to /Pending_Approval for posting
+# Qwen Code will post after approval
 ```
+
+#### Email Sending via MCP
+
+```bash
+# Send email directly
+python mcp_email_server.py send \
+  --to "client@example.com" \
+  --subject "Invoice #123" \
+  --body "Please find attached..."
+
+# Or via approval workflow
+# 1. Create approval request in /Pending_Approval
+# 2. Human moves to /Approved
+# 3. Orchestrator sends via MCP
+```
+
+#### Plan Generation
+
+Complex tasks automatically get Plan.md files:
+- Multi-step workflows
+- Tasks requiring approval
+- Cross-domain operations
+
+Plans include:
+- Clear objectives
+- Step-by-step checklist
+- Success criteria
+- Progress tracking
 
 ## ⚙️ Configuration
 
@@ -192,43 +278,62 @@ Customize `Company_Handbook.md` to set your rules:
 
 ## 🧪 Testing
 
-### Test the File Watcher
+### Test Gmail Watcher
 
 ```bash
-# Run watcher once (non-continuous)
-python watchers/filesystem_watcher.py "AI_Employee_Vault" "D:\DropFolder"
+# 1. Send yourself an email with subject "Test - AI Employee"
 
-# Check output for:
-# - "Initialized FileSystemWatcher"
-# - "Created action file: FILE_*.md"
+# 2. Run Gmail Watcher
+python watchers/gmail_watcher.py "AI_Employee_Vault" credentials.json
+
+# 3. Check /Needs_Action for new email file
+# 4. Verify email marked as read in Gmail
 ```
 
-### Test the Orchestrator
+### Test LinkedIn Poster
 
 ```bash
-# Run one cycle
+# 1. Create draft post
+python watchers/linkedin_poster.py "AI_Employee_Vault" draft business_update "Test Post"
+
+# 2. Check /LinkedIn_Posts for draft file
+# 3. Review content
+# 4. Move to /Pending_Approval for posting
+```
+
+### Test MCP Email Server
+
+```bash
+# 1. Test send
+python mcp_email_server.py send \
+  --to "your-email@gmail.com" \
+  --subject "Test Email" \
+  --body "This is a test from AI Employee"
+
+# 2. Check inbox for test email
+```
+
+### Test Approval Workflow
+
+```bash
+# 1. Create test approval file in /Pending_Approval
+# 2. Run orchestrator
 python orchestrator.py "AI_Employee_Vault"
 
-# Check output for:
-# - "Found X pending task(s)"
-# - "Claimed task: *.md"
-# - "Dashboard updated"
+# 3. Move file to /Approved
+# 4. Run orchestrator again
+# 5. Verify file moved to /Done
 ```
 
-### Test Qwen Code Integration
+### Test Plan Generation
 
 ```bash
-# Create a test task manually
-echo "---
-type: test
-status: pending
----
+# 1. Create complex task in /Needs_Action
+# 2. Run orchestrator
+python orchestrator.py "AI_Employee_Vault"
 
-# Test Task
-Process this test." > "AI_Employee_Vault/Needs_Action/TEST_2026-03-27.md"
-
-# Run Qwen Code
-qwen --cwd "AI_Employee_Vault" --prompt "Process TEST_2026-03-27.md"
+# 3. Check /Plans for new plan file
+# 4. Verify steps match task type
 ```
 
 ## 📊 Dashboard
@@ -275,16 +380,17 @@ qwen --version
 2. **Check task file**: Ensure valid markdown format
 3. **Review Company Handbook**: Rules may require approval
 
-## 🎯 Next Steps (Silver Tier)
+## 🎯 Next Steps (Gold Tier)
 
-After mastering Bronze Tier, upgrade to Silver:
+After mastering Silver Tier, upgrade to Gold:
 
-- [ ] Add Gmail Watcher for email monitoring
-- [ ] Add WhatsApp Watcher (Playwright-based)
-- [ ] Implement MCP server for sending emails
-- [ ] Create human-in-the-loop approval workflow
-- [ ] Set up scheduled tasks (cron/Task Scheduler)
-- [ ] Auto-post to LinkedIn for business
+- [ ] WhatsApp Watcher for messaging monitoring
+- [ ] Weekly CEO Briefing generation
+- [ ] Odoo accounting integration
+- [ ] Multiple MCP servers
+- [ ] Ralph Wiggum loop for persistence
+- [ ] Comprehensive error recovery
+- [ ] Cloud deployment for 24/7 operation
 
 ## 📝 Hackathon Checklist
 
@@ -299,21 +405,25 @@ After mastering Bronze Tier, upgrade to Silver:
 - [x] Basic folder structure
 - [x] Agent Skill documentation
 
-### Silver Tier (Future)
+### Silver Tier (Complete)
 
-- [ ] Gmail Watcher
-- [ ] WhatsApp Watcher
-- [ ] MCP email server
-- [ ] Approval workflow
-- [ ] Scheduled tasks
+- [x] Gmail Watcher - Monitor incoming emails
+- [x] LinkedIn Poster - Auto-post business content
+- [x] MCP Email Server - Send emails via Gmail
+- [x] Plan generation for multi-step tasks
+- [x] HITL approval workflow
+- [x] Enhanced orchestrator
+- [x] 7 Agent Skills documented
 
 ### Gold Tier (Future)
 
+- [ ] WhatsApp Watcher
+- [ ] Weekly CEO Briefing
 - [ ] Odoo accounting integration
-- [ ] Social media posting
 - [ ] Multiple MCP servers
-- [ ] CEO Briefing generation
 - [ ] Ralph Wiggum loop
+- [ ] Error recovery system
+- [ ] Comprehensive audit logging
 
 ## 🔐 Security Notes
 

@@ -1,10 +1,19 @@
-# AI Employee Bronze Tier - Python Dependencies
+# AI Employee Silver Tier - Python Dependencies
 
 # Core dependencies
 watchdog>=3.0.0  # File system monitoring
 
-# Optional dependencies
-# google-api-python-client>=2.0.0  # Gmail API (for future Gmail watcher)
-# google-auth-httplib2>=0.1.0
-# google-auth-oauthlib>=1.0.0
-# playwright>=1.40.0  # WhatsApp Web automation (for future WhatsApp watcher)
+# Gmail API
+google-api-python-client>=2.100.0
+google-auth-httplib2>=0.1.0
+google-auth-oauthlib>=1.0.0
+
+# LinkedIn/Web Automation
+playwright>=1.40.0
+
+# Scheduling
+apscheduler>=3.10.0
+
+# Utilities
+python-dotenv>=1.0.0
+requests>=2.31.0

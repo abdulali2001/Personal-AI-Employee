@@ -1,1 +1,0 @@
-"New test file created while watcher is running"  
