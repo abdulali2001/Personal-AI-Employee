@@ -11,6 +11,9 @@ __pycache__/
 # Logs
 *.log
 
+AI_Employee_Vault/.gmail_token.pickle
+credentials.json
+
 
 # Virtual environment
 venv/
