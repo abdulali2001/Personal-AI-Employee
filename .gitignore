@@ -11,8 +11,6 @@ __pycache__/
 # Logs
 *.log
 
-# Project runtime data
-AI_Employee_Vault/
 
 # Virtual environment
 venv/
