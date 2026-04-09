@@ -12,10 +12,7 @@ __pycache__/
 *.log
 
 AI_Employee_Vault/.gmail_token.pickle
-credentials.json
-
-# Project runtime data
-AI_Employee_Vault/
+AI_Employee_Vault/credentials.json
 
 # Virtual environment
 venv/
